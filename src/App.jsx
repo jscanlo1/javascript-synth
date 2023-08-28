@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import wavetable from './assets/Ethnic_33.json'
+import SynthKnob from './components/SynthKnob/SynthKnob';
 const audioCtx = new AudioContext();
 // Create an oscillator node to generate tones
 
@@ -51,44 +52,59 @@ export default function App() {
   const [gain, setGain] = useState(0.0)
 
   updateFreqValue(frequency);
-  updateGainValue(gain
-    );
+  updateGainValue(gain);
 
   
 
 
   return (
     <div className='w-full h-full'>
-      <div>
+      <h1 className='text-2xl pb-8 mb-8'>
+        My Modular Synth
+      </h1>
+      <div className='pb-8 mb-8'>
         <OnButton/>
       </div>
+
+      <div className='flex flex-1 justify-evenly p-4 mb-8 mx-auto w-5/6 border-2 border-zinc-800 rounded-lg '>
+        <div className='inline-block w-26 h-42 bg-cyan-400 border-2 border-zinc-800 rounded-lg my-auto m-2 p-2'>
+          <p className='font-bold'>
+            Oscillator
+          </p>
+          <div className='w-3/4 mx-auto'>
+          <label>
+            Frequency Hz
+            <input name='osc' id='osc' value={frequency} typeof='text' className='w-20' onChange={(e) => setFrequency(e.target.value)} />
+          </label>
+          </div>
+        </div>
+
+
+        <div className='inline-block w-26 h-42 bg-cyan-400 border-2 border-zinc-800 rounded-lg my-auto m-2 p-2'>
+          <p className='font-bold'>
+            AMP
+          </p>
+
+          <div className='w-3/4 mx-auto'>
+          <label>
+            Gain
+            <input name='amp' id='amp' value={gain} typeof='text' className='w-20' onChange={(e) => setGain(e.target.value)} />
+          </label>
+
+          </div>
+          
+          
+          
+
+        </div>
+
+
+      </div>
+
+     
       
 
-      <label htmlFor="frequency">Frequency</label>
-      <input 
-        onChange={(e) => {
-          setFrequency(e.target.value);
-        }}
-        name="frequency"
-        id="frequency"
-        type="range"
-        min="0"
-        max="1000"
-        value={frequency}
-        step="100" />
-
-      <label htmlFor="gain">Gain</label>
-      <input
-        onChange={(e) => {
-          setGain(e.target.value);
-        }}
-        name="gain"
-        id="gain"
-        type="range"
-        min="0"
-        max="1"
-        value={gain}
-        step="0.1" />
+      
       
     </div>);
 }
@@ -114,3 +130,20 @@ function OnButton () {
 
   )
 }
+
+
+
+/**
+ * <label htmlFor="gain">Gain</label>
+        <input
+          onChange={(e) => {
+            setGain(e.target.value);
+          }}
+          name="gain"
+          id="gain"
+          type="range"
+          min="0"
+          max="1"
+          value={gain}
+          step="0.1" />
+ */
