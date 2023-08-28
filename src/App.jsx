@@ -36,11 +36,13 @@ const updateGainValue = (value) => {
 
 
 const toggleAudio = () => {
+  
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   } else {
     audioCtx.suspend();
   }
+  
 };
 
 
@@ -49,13 +51,18 @@ export default function App() {
   const [gain, setGain] = useState(0.0)
 
   updateFreqValue(frequency);
-  updateGainValue(gain);
+  updateGainValue(gain
+    );
 
   
 
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }} onClick={toggleAudio} >
+    <div className='w-full h-full'>
+      <div>
+        <OnButton/>
+      </div>
+      
 
       <label htmlFor="frequency">Frequency</label>
       <input 
@@ -86,3 +93,24 @@ export default function App() {
     </div>);
 }
 
+
+function OnButton () {
+  const [on, setOn] = useState(false);
+
+  function onToggle() {
+    setOn(!on);
+    toggleAudio();
+  }
+  let classes;
+  if(on){
+    classes = 'bg-green-600 shadow-green-500 text-zinc-950';
+  } else {
+    classes = 'bg-gray-400 shadow-gray-500  text-gray-600';
+  }
+
+  return(
+
+    <button onClick={onToggle} className={`${classes} rounded-full h-20 w-20 shadow-2xl border-2 border-zinc-900 `} >ON</button>
+
+  )
+}
