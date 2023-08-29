@@ -54,6 +54,13 @@ export default function App() {
   updateFreqValue(frequency);
   updateGainValue(gain);
 
+  function handleOnGain(val) {
+    setGain(val/100.0);
+  }
+
+  function handleSetFrequency(val){
+    setFrequency(val * 10);
+  }
   
 
 
@@ -76,6 +83,8 @@ export default function App() {
             Frequency Hz
             <input name='osc' id='osc' value={frequency} typeof='text' className='w-20' onChange={(e) => setFrequency(e.target.value)} />
           </label>
+
+          <SynthKnob value={frequency / 10} setValue={handleSetFrequency} min={0} max={200} setStep={1}/>
           </div>
         </div>
 
@@ -88,24 +97,13 @@ export default function App() {
           <div className='w-3/4 mx-auto'>
           <label>
             Gain
-            <input name='amp' id='amp' value={gain} typeof='text' className='w-20' onChange={(e) => setGain(e.target.value)} />
+            <input name='amp' id='amp' value={gain } typeof='text' className='w-20' onChange={(e) => setGain(e.target.value)} />
           </label>
 
+          <SynthKnob value={gain * 100} setValue={handleOnGain} min={0} max={100} setStep={1}/>
           </div>
-          
-          
-          
-
         </div>
-
-
-      </div>
-
-     
-      
-
-      
-      
+      </div>  
     </div>);
 }
 
